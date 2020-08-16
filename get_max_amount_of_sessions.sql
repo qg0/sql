@@ -1,5 +1,7 @@
 /* Get maximum amount of active sessions */
 
+/* http://sqlfiddle.com/#!9/6dce75/1 */
+
 --------------------------------------------------------------------
 
 SET @CNT:=0;
