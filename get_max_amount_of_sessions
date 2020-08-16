@@ -6,13 +6,15 @@ SET @CNT:=0;
 SET @INC:=1;
 SET @DEC:=-1;
 
-SELECT `AMOUNT` FROM (SELECT *, @CNT:=@CNT+CNT AS AMOUNT FROM
+SELECT `AMOUNT` FROM 
 (
-  SELECT `Left` as `Date`, @INC AS CNT FROM `session`
-	UNION
-	SELECT `Right` as `Date`, @DEC AS CNT FROM `session`
-) T1
-ORDER BY `Date`
+	SELECT *, @CNT:=@CNT+CNT AS AMOUNT FROM
+	(
+		SELECT `Left` as `Date`, @INC AS CNT FROM `session`
+		UNION
+		SELECT `Right` as `Date`, @DEC AS CNT FROM `session`
+	) T1
+	ORDER BY `Date`
 ) T2
 ORDER BY `AMOUNT` DESC LIMIT 1
 
