@@ -14,9 +14,9 @@ SELECT `amount` FROM
 (
     SELECT *, @cnt:=@cnt+cnt AS amount FROM
     (
-        SELECT `login_time` as `time`, @inc AS cnt FROM `session` WHERE `login_time` >= @login_time 
+        SELECT `login_time` as `time`, @inc AS cnt FROM `session` /* WHERE `login_time` >= @login_time */
         UNION
-        SELECT `logout_time` as `time`, @dec AS cnt FROM `session`  WHERE `login_time` >= @login_time AND `logout_time` <= @logout_time
+        SELECT `logout_time` as `time`, @dec AS cnt FROM `session` /*  WHERE `login_time` >= @login_time AND `logout_time` <= @logout_time */
     ) T1
     ORDER BY `time`
 ) T2
