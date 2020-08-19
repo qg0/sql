@@ -4,21 +4,23 @@
 
 --------------------------------------------------------------------
 
-SET @CNT:=0;
-SET @INC:=1;
-SET @DEC:=-1;
+SET @login_time = '2015-10-10';
+SET @login_time = '2027-20-20';
+SET @cnt:=0;
+SET @inc:=1;
+SET @dec:=-1;
 
-SELECT `AMOUNT` FROM 
+SELECT `amount` FROM 
 (
-	SELECT *, @CNT:=@CNT+CNT AS AMOUNT FROM
-	(
-	    SELECT `login_time` as `time`, @INC AS CNT FROM `session` WHERE `login_time` >= @login_time 
-	    UNION
-	    SELECT `logout_time` as `time`, @DEC AS CNT FROM `session`  WHERE `login_time` >= @login_time AND `logout_time` <= @logout_time
-	) T1
-	ORDER BY `time`
-	) T2
-ORDER BY `AMOUNT` DESC LIMIT 1
+    SELECT *, @cnt:=@cnt+cnt AS amount FROM
+    (
+        SELECT `login_time` as `time`, @inc AS cnt FROM `session` WHERE `login_time` >= @login_time 
+        UNION
+        SELECT `logout_time` as `time`, @dec AS cnt FROM `session`  WHERE `login_time` >= @login_time AND `logout_time` <= @logout_time
+    ) T1
+    ORDER BY `time`
+) T2
+ORDER BY `amount` DESC LIMIT 1
 
 --------------------------------------------------------------------
 
